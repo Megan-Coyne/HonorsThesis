@@ -1,0 +1,24 @@
+<div class="container-fluid px-6 py-4">
+  <div class="col-md-2 p-0">
+    <app-nav-buttons></app-nav-buttons>
+  </div>
+
+  <h1 class="text-3xl font-bold text-center text-blue-900 my-6">
+    Datasets
+  </h1>
+  <section class="datasets-container">
+    <div *ngFor="let dataset of datasets" class="dataset-card">
+      <h2 class="text-2xl font-semibold text-blue-800 mb-3 text-center">{{ dataset.title }}</h2>
+      <p>{{ dataset.description }}</p>
+      <div class="dataset-actions">
+        <a [href]="dataset.sourceUrl" target="_blank" rel="noopener" class="link">View Source</a>
+        <!-- Button download -->
+        <button (click)="downloadFileFromUrl(dataset.downloadUrl)" class="btn"
+          style="background-color: rgb(0, 161, 161);">
+          Download File
+        </button>
+
+      </div>
+    </div>
+  </section>
+</div>

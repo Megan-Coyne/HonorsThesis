@@ -1,0 +1,18 @@
+<div class="relative w-full menu-container">
+    <!-- Menu Button -->
+    <button (click)="toggleMenu()"
+        class="px-4 py-2 rounded-lg text-red-900 font-semibold text-lg hover:bg-[rgb(255,100,215)] hover:text-white transition-colors">
+        💙💙 Menu 💙💙
+    </button>
+
+    <!-- Dropdown -->
+    <div *ngIf="isMenuOpen"
+        class="absolute left-0 mt-2 w-50 bg-white text-slate rounded-lg shadow-lg border border-gray-200 z-50 p-3 flex flex-col gap-2">
+
+        <a *ngFor="let page of pages" [routerLink]="page.url" [ngClass]="getLinkClasses(page.url)"
+            class="px-3 py-2 rounded-md text-red-900 transition hover:bg-[rgb(255,0,174)] hover:text-white"
+            (click)="isMenuOpen = false">
+            {{ page.name }}
+        </a>
+    </div>
+</div>
