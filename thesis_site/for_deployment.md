@@ -5,6 +5,6 @@
 ```bash
 cd sarahcoyne
 npm install
-ng build --configuration=production --base-href=/ 
-npx angular-cli-ghpages --dir=dist/sarahcoyne/browser
+ng build --configuration=production --base-href=/HonorsThesis/
+npx angular-cli-ghpages --dir=dist/thesis_site/browser
 ```
