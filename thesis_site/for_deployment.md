@@ -3,7 +3,7 @@
 ## For Deployment
 
 ```bash
-cd sarahcoyne
+cd thesis_site
 npm install
 ng build --configuration=production --base-href=/HonorsThesis/
 npx angular-cli-ghpages --dir=dist/thesis_site/browser
