@@ -424,6 +424,9 @@
   .text-blue-900 {
     color: var(--color-blue-900);
   }
+  .text-lime-600{
+    color: var(--color-lime-600); 
+  }
   .text-gray-800 {
     color: var(--color-gray-800);
   }

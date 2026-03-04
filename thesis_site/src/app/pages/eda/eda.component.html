@@ -1,397 +1,484 @@
 <div class="container-fluid px-6 md:px-6 lg:px-6 py-2 md:py-2 lg:py-2">
-    <div class="col-md-2 p-0">
-        <app-nav-buttons></app-nav-buttons>
+  <div class="col-md-2 p-0">
+    <app-nav-buttons></app-nav-buttons>
+  </div>
+
+  <h1 class="text-3xl font-bold text-center text-blue-900 my-6">
+    Exploratory Data Analysis
+  </h1>
+
+  <p class="text-lg text-gray-800 leading-relaxed mb-4">
+    To begin the research, explore the data in the following sections (click
+    graphs to enlargen):
+  </p>
+
+  <!-- ✅ Single global modal — moved outside all sections -->
+  <div
+    *ngIf="modalImage"
+    class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/20"
+    (click)="closeModal()"
+  >
+    <div class="relative" (click)="$event.stopPropagation()">
+      <button
+        class="absolute top-2 right-2 text-white text-2xl font-bold"
+        (click)="closeModal()"
+      >
+        ×
+      </button>
+      <img
+        [src]="modalImage"
+        class="max-w-full max-h-screen rounded-lg shadow-lg"
+      />
+    </div>
+  </div>
+
+  <div class="max-w-5xl mx-auto space-y-4">
+
+    <!-- Section 1: Ford -->
+    <div class="border rounded-lg shadow">
+      <button
+        class="w-full text-left px-4 py-3 font-semibold text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-t-lg"
+        (click)="toggleSection(1)"
+      >
+        Ford Historical Stock EDA
+      </button>
+      <div *ngIf="openSection === 1" class="p-4 bg-white">
+        <p>
+          Given the variables in the Ford stock dataset, which contains
+          historical stock prices from January 2, 1990, to December 31, 2024
+          (including Open, Close, Volume, Returns, and Delisting Price), here is
+          the exploratory data analysis (EDA) constructed from this data.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Stock Price</p>
+            <img src="assets/img/eda/ford_stock_1990_2024.png" alt="Ford Stock Price"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/ford_stock_1990_2024.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Trading Volume</p>
+            <img src="assets/img/eda/Ford_Trading_Volume_(199_–2_24).png" alt="Ford Trading Volume"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Ford_Trading_Volume_(199_–2_24).png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Cumulative Return</p>
+            <img src="assets/img/eda/Ford_Cumulative_Return_(199_–2_24).png" alt="Ford Cumulative Return"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Ford_Cumulative_Return_(199_–2_24).png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Distribution of Daily Returns</p>
+            <img src="assets/img/eda/Ford_Distribution_of_Daily_Returns.png" alt="Ford Distribution of Daily Returns"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Ford_Distribution_of_Daily_Returns.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Stock Price with Moving Averages</p>
+            <img src="assets/img/eda/Ford_Stock_Price_with_Moving_Averages.png" alt="Ford Stock Price with Moving Averages"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Ford_Stock_Price_with_Moving_Averages.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Daily Rolling Volatility</p>
+            <img src="assets/img/eda/Ford_3_-Day_Rolling_Volatility.png" alt="Ford Daily Rolling Volatility"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Ford_3_-Day_Rolling_Volatility.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Average Yearly Returns</p>
+            <img src="assets/img/eda/Ford_Average_Yearly_Returns.png" alt="Ford Average Yearly Returns"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Ford_Average_Yearly_Returns.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Average Monthly Volume</p>
+            <img src="assets/img/eda/Ford_Average_Monthly_Volume.png" alt="Ford Average Monthly Volume"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Ford_Average_Monthly_Volume.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Summary Statistics of Stock Data</p>
+            <img src="assets/img/eda/ford_stats.png" alt="Summary Statistics of Ford Stock Data"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/ford_stats.png')" />
+          </div>
+        </div>
+      </div>
     </div>
 
-    <h1 class="text-3xl font-bold text-center text-blue-900 my-6">
-        Exploratory Data Analysis
-    </h1>
+    <!-- Section 2: General Motors -->
+    <div class="border rounded-lg shadow">
+      <button
+        class="w-full text-left px-4 py-3 font-semibold text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-t-lg"
+        (click)="toggleSection(2)"
+      >
+        General Motors Historical Stock EDA
+      </button>
+      <div *ngIf="openSection === 2" class="p-4 bg-white">
+        <p>
+          Given the variables in the General Motors stock dataset, which
+          contains historical stock prices from January 2, 1990, to December 31,
+          2024 (including Open, Close, Volume, Returns, and Delisting Price),
+          here is the exploratory data analysis (EDA) constructed from this
+          data. <br /><br />Note: Data around 2009–2011 distorted by GM's
+          bankruptcy and restructuring.
+        </p>
 
-    <p class="text-lg text-gray-800 leading-relaxed mb-4">
-        To begin the research, explore the data in the following sections (NOT COMPLETE, MORE GRAPHS TO COME) (CLICK ON THE GRAPHS TO ENLARGEN): 
-    </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Stock Price</p>
+            <img src="assets/img/eda/GM_Stock_Price_(199_–2_24).png" alt="General Motors Stock Price"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/GM_Stock_Price_(199_–2_24).png')" />
+          </div>
 
-    <div class="max-w-5xl mx-auto space-y-4">
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Trading Volume</p>
+            <img src="assets/img/eda/GM_Trading_Volume_(199_–2_24).png" alt="General Motors Trading Volume"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/GM_Trading_Volume_(199_–2_24).png')" />
+          </div>
 
-        <!-- Section 1 -->
-        <div class="border rounded-lg shadow">
-            <button
-                class="w-full text-left px-4 py-3 font-semibold text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-t-lg"
-                (click)="toggleSection(1)">
-                Ford Historical Stock EDA
-            </button>
-            <div *ngIf="openSection === 1" class="p-4 bg-white">
-                <p>Given the variables in the Ford stock dataset, which contains historical stock prices from January 2,
-                    1990, to December 31, 2024 (including Open, Close, Volume, Returns, and Delisting Price), here is
-                    the exploratory data analysis (EDA) constructed from this data.
-                </p>
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Cumulative Return</p>
+            <img src="assets/img/eda/GM_Cumulative_Return_(199_–2_24).png" alt="General Motors Cumulative Return"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/GM_Cumulative_Return_(199_–2_24).png')" />
+          </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
-                    <!-- Ford Stock Price -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Stock Price</p>
-                        <img src="assets/img/eda/ford_stock_1990_2024.png" alt="Ford Stock Price"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/ford_stock_1990_2024.png')" />
-                    </div>
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Distribution of Daily Returns</p>
+            <img src="assets/img/eda/GM_Distribution_of_Daily_Returns.png" alt="General Motors Distribution of Daily Returns"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/GM_Distribution_of_Daily_Returns.png')" />
+          </div>
 
-                    <div *ngIf="modalImage"
-                        class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/20"
-                        (click)="closeModal()">
-                        <div class="relative" (click)="$event.stopPropagation()">
-                            <button class="absolute top-2 right-2 text-white text-2xl font-bold"
-                                (click)="closeModal()">×</button>
-                            <img [src]="modalImage" class="max-w-full max-h-screen rounded-lg shadow-lg" />
-                        </div>
-                    </div>
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Stock Price with Moving Averages</p>
+            <img src="assets/img/eda/GM_Stock_Price_with_Moving_Averages.png" alt="General Motors Stock Price with Moving Averages"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/GM_Stock_Price_with_Moving_Averages.png')" />
+          </div>
 
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Daily Rolling Volatility</p>
+            <img src="assets/img/eda/GM_3_-Day_Rolling_Volatility.png" alt="General Motors Daily Rolling Volatility"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/GM_3_-Day_Rolling_Volatility.png')" />
+          </div>
 
-                    <!-- Ford Trading Volume -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Trading Volume</p>
-                        <img src="assets/img/eda/Ford_Trading_Volume_(199_–2_24).png" alt="Ford Trading Volume"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Ford_Trading_Volume_(199_–2_24).png')" />
-                    </div>
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Average Yearly Returns</p>
+            <img src="assets/img/eda/GM_Average_Yearly_Returns.png" alt="General Motors Average Yearly Returns"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/GM_Average_Yearly_Returns.png')" />
+          </div>
 
-                    <!-- Ford Cumulative Return -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Cumulative Return</p>
-                        <img src="assets/img/eda/Ford_Cumulative_Return_(199_–2_24).png" alt="Ford Cumulative Return"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Ford_Cumulative_Return_(199_–2_24).png')" />
-                    </div>
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Average Monthly Volume</p>
+            <img src="assets/img/eda/GM_Average_Monthly_Volume.png" alt="General Motors Average Monthly Volume"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/GM_Average_Monthly_Volume.png')" />
+          </div>
 
-                    <!-- Distribution of Daily Returns -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Distribution of Daily Returns</p>
-                        <img src="assets/img/eda/Ford_Distribution_of_Daily_Returns.png"
-                            alt="Ford Distribution of Daily Returns" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Ford_Distribution_of_Daily_Returns.png')" />
-                    </div>
-
-                    <!-- Stock Price with Moving Averages -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Stock Price with Moving Averages</p>
-                        <img src="assets/img/eda/Ford_Stock_Price_with_Moving_Averages.png"
-                            alt="Ford Stock Price with Moving Averages" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Ford_Stock_Price_with_Moving_Averages.png')" />
-                    </div>
-
-                    <!-- Daily Rolling Volatility -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Daily Rolling Volatility</p>
-                        <img src="assets/img/eda/Ford_3_-Day_Rolling_Volatility.png" alt="Ford Daily Rolling Volatility"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Ford_3_-Day_Rolling_Volatility.png')" />
-                    </div>
-
-                    <!-- Average Yearly Returns -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Average Yearly Returns</p>
-                        <img src="assets/img/eda/Ford_Average_Yearly_Returns.png" alt="Ford Average Yearly Returns"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Ford_Average_Yearly_Returns.png')" />
-                    </div>
-
-                    <!-- Average Monthly Volume -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Average Monthly Volume</p>
-                        <img src="assets/img/eda/Ford_Average_Monthly_Volume.png" alt="Ford Average Monthly Volume"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Ford_Average_Monthly_Volume.png')" />
-                    </div>
-
-                    <!-- Means and Standard Devs -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Summary Statistics of Stock Data</p>
-                        <img src="assets/img/eda/ford_stats.png"
-                            alt="Summary Statistics of Ford Stock Data" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/ford_stats.png')" />
-                    </div>
-                </div>
-            </div>
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Summary Statistics of Stock Data</p>
+            <img src="assets/img/eda/gm_stats.png" alt="Summary Statistics of GM Stock Data"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/gm_stats.png')" />
+          </div>
         </div>
-
-        <!-- Section 2 -->
-        <div class="border rounded-lg shadow">
-            <button
-                class="w-full text-left px-4 py-3 font-semibold text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-t-lg"
-                (click)="toggleSection(2)">
-                General Motors Historical Stock EDA
-            </button>
-            <div *ngIf="openSection === 2" class="p-4 bg-white">
-                <p>Given the variables in the General Motors stock dataset, which contains historical stock prices from
-                    January 2,
-                    1990, to December 31, 2024 (including Open, Close, Volume, Returns, and Delisting Price), here is
-                    the exploratory data analysis (EDA) constructed from this data. <br><br>Note: Data around 2009–2011 distorted by GM’s bankruptcy and restructuring.
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
-                    <!-- General Motors Stock Price -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Stock Price</p>
-                        <img src="assets/img/eda/GM_Stock_Price_(199_–2_24).png" alt="General Motors Stock Price"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/GM_Stock_Price_(199_–2_24).png')" />
-                    </div>
-
-                    <div *ngIf="modalImage"
-                        class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/20"
-                        (click)="closeModal()">
-                        <div class="relative" (click)="$event.stopPropagation()">
-                            <button class="absolute top-2 right-2 text-white text-2xl font-bold"
-                                (click)="closeModal()">×</button>
-                            <img [src]="modalImage" class="max-w-full max-h-screen rounded-lg shadow-lg" />
-                        </div>
-                    </div>
-
-                    <!-- General Motors Trading Volume -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Trading Volume</p>
-                        <img src="assets/img/eda/GM_Trading_Volume_(199_–2_24).png" alt="General Motors Trading Volume"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/GM_Trading_Volume_(199_–2_24).png')" />
-                    </div>
-
-                    <!-- General Motors Cumulative Return -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Cumulative Return</p>
-                        <img src="assets/img/eda/GM_Cumulative_Return_(199_–2_24).png"
-                            alt="General Motors Cumulative Return" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/GM_Cumulative_Return_(199_–2_24).png')" />
-                    </div>
-
-                    <!-- Distribution of Daily Returns -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Distribution of Daily Returns</p>
-                        <img src="assets/img/eda/GM_3_-Day_Rolling_Volatility.png"
-                            alt="General Motors Distribution of Daily Returns" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/GM_3_-Day_Rolling_Volatility.png')" />
-                    </div>
-
-                    <!-- Stock Price with Moving Averages -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Stock Price with Moving Averages</p>
-                        <img src="assets/img/eda/GM_Stock_Price_with_Moving_Averages.png"
-                            alt="General Motors Stock Price with Moving Averages" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/GM_Stock_Price_with_Moving_Averages.png')" />
-                    </div>
-
-                    <!-- Daily Rolling Volatility -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Daily Rolling Volatility</p>
-                        <img src="assets/img/eda/GM_3_-Day_Rolling_Volatility.png"
-                            alt="General Motors Daily Rolling Volatility" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/GM_3_-Day_Rolling_Volatility.png')" />
-                    </div>
-
-                    <!-- Average Yearly Returns -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Average Yearly Returns</p>
-                        <img src="assets/img/eda/GM_Average_Yearly_Returns.png"
-                            alt="General Motors Average Yearly Returns" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/GM_Average_Yearly_Returns.png')" />
-                    </div>
-
-                    <!-- Average Monthly Volume -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Average Monthly Volume</p>
-                        <img src="assets/img/eda/GM_Average_Monthly_Volume.png"
-                            alt="General Motors Average Monthly Volume" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/GM_Average_Monthly_Volume.png')" />
-                    </div>
-
-                    <!-- Means and Standard Devs -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Summary Statistics of Stock Data</p>
-                        <img src="assets/img/eda/gm_stats.png"
-                            alt="Summary Statistics of GM Stock Data" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/gm_stats.png')" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Section 3 -->
-        <div class="border rounded-lg shadow">
-            <button
-                class="w-full text-left px-4 py-3 font-semibold text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-t-lg"
-                (click)="toggleSection(3)">
-                Stellantis & Chrysler Historical Stock EDA
-            </button>
-            <div *ngIf="openSection === 3" class="p-4 bg-white">
-                <p>Given the variables in the Stellantis x Chrysler stock dataset, which contains historical stock
-                    prices from
-                    January 2,
-                    1990, to December 31, 2024 (including Open, Close, Volume, Returns, and Delisting Price), here is
-                    the exploratory data analysis (EDA) constructed from this data. <br><br>Note: Data gaps reflect Chrysler’s private ownership after 2009 bankruptcy.
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
-                    <!-- Stellantis/Chrysler Stock Price -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Stock Price</p>
-                        <img src="assets/img/eda/Stellantis_Stock_Price_(199_–2_24).png"
-                            alt="Stellantis/Chrysler Stock Price" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Stellantis_Stock_Price_(199_–2_24).png')" />
-                    </div>
-
-                    <div *ngIf="modalImage"
-                        class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/20"
-                        (click)="closeModal()">
-                        <div class="relative" (click)="$event.stopPropagation()">
-                            <button class="absolute top-2 right-2 text-white text-2xl font-bold"
-                                (click)="closeModal()">×</button>
-                            <img [src]="modalImage" class="max-w-full max-h-screen rounded-lg shadow-lg" />
-                        </div>
-                    </div>
-
-                    <!-- Stellantis/Chrysler Trading Volume -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Trading Volume</p>
-                        <img src="assets/img/eda/Stellantis_Trading_Volume_(199_–2_24).png"
-                            alt="Stellantis/Chrysler Trading Volume" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Stellantis_Trading_Volume_(199_–2_24).png')" />
-                    </div>
-
-                    <!-- Stellantis/Chrysler Cumulative Return -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Cumulative Return</p>
-                        <img src="assets/img/eda/Stellantis_Cumulative_Return_(199_–2_24).png"
-                            alt="Stellantis/Chrysler Cumulative Return" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Stellantis_Cumulative_Return_(199_–2_24).png')" />
-                    </div>
-
-                    <!-- Distribution of Daily Returns -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Distribution of Daily Returns</p>
-                        <img src="assets/img/eda/Stellantis_3_-Day_Rolling_Volatility.png"
-                            alt="Stellantis/Chrysler Distribution of Daily Returns" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Stellantis_3_-Day_Rolling_Volatility.png')" />
-                    </div>
-
-                    <!-- Stock Price with Moving Averages -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Stock Price with Moving Averages</p>
-                        <img src="assets/img/eda/Stellantis_Stock_Price_with_Moving_Averages.png"
-                            alt="Stellantis/Chrysler Stock Price with Moving Averages"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Stellantis_Stock_Price_with_Moving_Averages.png')" />
-                    </div>
-
-                    <!-- Daily Rolling Volatility -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Daily Rolling Volatility</p>
-                        <img src="assets/img/eda/Stellantis_3_-Day_Rolling_Volatility.png"
-                            alt="Stellantis/Chrysler Daily Rolling Volatility" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Stellantis_3_-Day_Rolling_Volatility.png')" />
-                    </div>
-
-                    <!-- Average Yearly Returns -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Average Yearly Returns</p>
-                        <img src="assets/img/eda/Stellantis_Average_Yearly_Returns.png"
-                            alt="Stellantis/Chrysler Average Yearly Returns" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Stellantis_Average_Yearly_Returns.png')" />
-                    </div>
-
-                    <!-- Average Monthly Volume -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Average Monthly Volume</p>
-                        <img src="assets/img/eda/Stellantis_Average_Monthly_Volume.png"
-                            alt="Stellantis/Chrysler Average Monthly Volume" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Stellantis_Average_Monthly_Volume.png')" />
-                    </div>
-
-                    <!-- Means and Standard Devs -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Summary Statistics of Stock Data</p>
-                        <img src="assets/img/eda/stellantis_stats.png"
-                            alt="Summary Statistics of Stellantis Stock Data" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/stellantis_stats.png')" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Section 4 -->
-        <div class="border rounded-lg shadow">
-            <button
-                class="w-full text-left px-4 py-3 font-semibold text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-t-lg"
-                (click)="toggleSection(4)">
-                Detroit's Economic Conditions Index EDA
-            </button>
-            <div *ngIf="openSection === 4" class="p-4 bg-white">
-                <p>
-                    The Detroit Economic Conditions Index (ECI) tracks economic growth in the Detroit-Warren-Dearborn
-                    area from February 1990 to December 2019. It combines 12 key economic indicators, calibrated to
-                    Gross Metropolitan Product growth. This EDA examines trends and patterns in the ECI to understand
-                    Detroit’s economic conditions. Data obtained from the Federal Reserve Bank of St. Louis via FRED®.
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
-                    <!-- Detroit Economic Conditions Index -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Economic Conditions Index</p>
-                        <img src="assets/img/eda/Detroit_Economic_Conditions_Index.png"
-                            alt="Detroit Economic Conditions Index" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Detroit_Economic_Conditions_Index.png')" />
-                    </div>
-
-                    <div *ngIf="modalImage"
-                        class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/20"
-                        (click)="closeModal()">
-                        <div class="relative" (click)="$event.stopPropagation()">
-                            <button class="absolute top-2 right-2 text-white text-2xl font-bold"
-                                (click)="closeModal()">×</button>
-                            <img [src]="modalImage" class="max-w-full max-h-screen rounded-lg shadow-lg" />
-                        </div>
-                    </div>
-
-                    <!-- Distribution of Economic Conditions Index -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Distribution of Economic Conditions Index</p>
-                        <img src="assets/img/eda/Distribution_of_Detroit_Index.png"
-                            alt="Detroit Distribution of Economic Conditions Index" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Distribution_of_Detroit_Index.png')" />
-                    </div>
-
-                    <!-- Economic Conditions Index with Moving Averages -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Economic Conditions Index with Moving Averages</p>
-                        <img src="assets/img/eda/Detroit_Index_with_Moving_Average.png"
-                            alt="Detroit Economic Conditions Index with Moving Averages"
-                            class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Detroit_Index_with_Moving_Average.png')" />
-                    </div>
-
-                    <!-- Economic Conditions Index Rolling Volatility -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Rolling Volatility</p>
-                        <img src="assets/img/eda/Detroit_Index_Rolling_Volatility.png"
-                            alt="Economic Conditions Index Rolling Volatility" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Detroit_Index_Rolling_Volatility.png')" />
-                    </div>
-
-                    <!-- Average Yearly Economic Conditions Index -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Average Yearly Economic Conditions Index</p>
-                        <img src="assets/img/eda/Yearly_Avg_Detroit_Index.png"
-                            alt="Detroit Average Yearly Economic Conditions Index" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/Yearly_Avg_Detroit_Index.png')" />
-                    </div>
-
-                    <!-- Means and Standard Devs -->
-                    <div class="border rounded-lg p-2 shadow">
-                        <p class="text-center font-semibold mb-2">Summary Statistics of ECI Data</p>
-                        <img src="assets/img/eda/detroit_stats.png"
-                            alt="Summary Statistics of ECI Data" class="w-full h-auto cursor-pointer"
-                            (click)="openModal('assets/img/eda/detroit_stats.png')" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
+
+    <!-- Section 3: Stellantis -->
+    <div class="border rounded-lg shadow">
+      <button
+        class="w-full text-left px-4 py-3 font-semibold text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-t-lg"
+        (click)="toggleSection(3)"
+      >
+        Stellantis & Chrysler Historical Stock EDA
+      </button>
+      <div *ngIf="openSection === 3" class="p-4 bg-white">
+        <p>
+          Given the variables in the Stellantis x Chrysler stock dataset, which
+          contains historical stock prices from January 2, 1990, to December 31,
+          2024 (including Open, Close, Volume, Returns, and Delisting Price),
+          here is the exploratory data analysis (EDA) constructed from this
+          data. <br /><br />Note: Data gaps reflect Chrysler's private ownership
+          after 2009 bankruptcy.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Stock Price</p>
+            <img src="assets/img/eda/Stellantis_Stock_Price_(199_–2_24).png" alt="Stellantis/Chrysler Stock Price"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Stellantis_Stock_Price_(199_–2_24).png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Trading Volume</p>
+            <img src="assets/img/eda/Stellantis_Trading_Volume_(199_–2_24).png" alt="Stellantis/Chrysler Trading Volume"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Stellantis_Trading_Volume_(199_–2_24).png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Cumulative Return</p>
+            <img src="assets/img/eda/Stellantis_Cumulative_Return_(199_–2_24).png" alt="Stellantis/Chrysler Cumulative Return"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Stellantis_Cumulative_Return_(199_–2_24).png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Distribution of Daily Returns</p>
+            <img src="assets/img/eda/Stellantis_Distribution_of_Daily_Returns.png" alt="Stellantis/Chrysler Distribution of Daily Returns"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Stellantis_Distribution_of_Daily_Returns.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Stock Price with Moving Averages</p>
+            <img src="assets/img/eda/Stellantis_Stock_Price_with_Moving_Averages.png" alt="Stellantis/Chrysler Stock Price with Moving Averages"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Stellantis_Stock_Price_with_Moving_Averages.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Daily Rolling Volatility</p>
+            <img src="assets/img/eda/Stellantis_3_-Day_Rolling_Volatility.png" alt="Stellantis/Chrysler Daily Rolling Volatility"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Stellantis_3_-Day_Rolling_Volatility.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Average Yearly Returns</p>
+            <img src="assets/img/eda/Stellantis_Average_Yearly_Returns.png" alt="Stellantis/Chrysler Average Yearly Returns"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Stellantis_Average_Yearly_Returns.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Average Monthly Volume</p>
+            <img src="assets/img/eda/Stellantis_Average_Monthly_Volume.png" alt="Stellantis/Chrysler Average Monthly Volume"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Stellantis_Average_Monthly_Volume.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Summary Statistics of Stock Data</p>
+            <img src="assets/img/eda/stellantis_stats.png" alt="Summary Statistics of Stellantis Stock Data"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/stellantis_stats.png')" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Detroit ECI -->
+    <div class="border rounded-lg shadow">
+      <button
+        class="w-full text-left px-4 py-3 font-semibold text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-t-lg"
+        (click)="toggleSection(4)"
+      >
+        Detroit's Economic Conditions Index EDA
+      </button>
+      <div *ngIf="openSection === 4" class="p-4 bg-white">
+        <p>
+          The Detroit Economic Conditions Index (ECI) measures economic activity
+          in the Detroit–Warren–Dearborn area from 1990 to 2019, combining 12
+          indicators calibrated to Gross Metropolitan Product growth (data from
+          FRED®, Federal Reserve Bank of St. Louis). <br /><br />
+          Although the ECI is not used to build the predictive model, this EDA
+          provides context on the volatility and severity of Detroit's economic
+          fluctuations over time.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Economic Conditions Index</p>
+            <img src="assets/img/eda/Detroit_Economic_Conditions_Index.png" alt="Detroit Economic Conditions Index"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Detroit_Economic_Conditions_Index.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Distribution of Economic Conditions Index</p>
+            <img src="assets/img/eda/Distribution_of_Detroit_Index.png" alt="Detroit Distribution of Economic Conditions Index"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Distribution_of_Detroit_Index.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Economic Conditions Index with Moving Averages</p>
+            <img src="assets/img/eda/Detroit_Index_with_Moving_Average.png" alt="Detroit Economic Conditions Index with Moving Averages"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Detroit_Index_with_Moving_Average.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Rolling Volatility</p>
+            <img src="assets/img/eda/Detroit_Index_Rolling_Volatility.png" alt="Economic Conditions Index Rolling Volatility"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Detroit_Index_Rolling_Volatility.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Average Yearly Economic Conditions Index</p>
+            <img src="assets/img/eda/Yearly_Avg_Detroit_Index.png" alt="Detroit Average Yearly Economic Conditions Index"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/Yearly_Avg_Detroit_Index.png')" />
+          </div>
+
+          <div class="border rounded-lg p-2 shadow">
+            <p class="text-center font-semibold mb-2">Summary Statistics of ECI Data</p>
+            <img src="assets/img/eda/detroit_stats.png" alt="Summary Statistics of ECI Data"
+              class="w-full h-auto cursor-pointer"
+              (click)="openModal('assets/img/eda/detroit_stats.png')" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <br />
+  <p class="text-lg text-gray-800 leading-relaxed mb-4">
+    Overall, the stock return distributions, particularly for Ford and General
+    Motors, display volatility clustering, heavy tails, and pronounced extreme
+    movements during crisis periods, making them well suited for extreme value
+    modeling. In contrast, the Detroit Economic Conditions Index shows smoother
+    cyclical behavior and lower tail intensity, serving as a stable
+    macroeconomic benchmark. These patterns support applying extreme value
+    techniques to firm level returns while using the ECI as a comparative
+    measure of broader economic conditions.
+  </p>
+
+  <h1 class="text-3xl font-bold text-center text-blue-900 my-6">
+    Fitting the "Best" Distribution
+  </h1>
+
+  <p class="text-lg text-gray-800 leading-relaxed mb-4">
+    After conducting an initial examination of the data, the next step was to
+    determine which distribution is most appropriate for modeling extreme
+    values. In the honors thesis proposal, the Generalized Extreme Value (GEV)
+    distribution was proposed as the primary model. However, this assumption
+    needed to be tested rather than accepted at face value.
+  </p>
+
+  <p class="text-lg text-gray-800 leading-relaxed mb-4">
+    Several candidate distributions were explored to verify whether the GEV was
+    truly the best choice. Many alternatives failed to adequately capture tail
+    behavior or extreme spikes in the data. While fitting the data, using absolute
+    maximum monthly returns and testing log transformations, the Generalized
+    Pareto Distribution (GPD) stood out. It effectively captured the heaviest
+    tails, accommodated skewness, and provided more stable estimates for extreme
+    losses and gains, making it the most suitable choice for modeling Detroit's
+    stock extremes.
+  </p>
+
+  <p class="text-lg text-gray-800 leading-relaxed mb-4">
+    Ultimately, two distributions emerged as serious contenders: the Generalized
+    Extreme Value (GEV) distribution and the Generalized Pareto Distribution
+    (GPD). The GPD, in particular, demonstrated strong performance in modeling
+    threshold exceedances and provided a compelling alternative framework for
+    extreme value analysis.
+  </p>
+
+  <p class="text-lg text-gray-800 leading-relaxed mb-4">
+    Click below to explore and compare the performance of the GEV and GPD
+    models.
+  </p>
+
+  <div class="max-w-5xl mx-auto space-y-6 mt-6">
+
+    <!-- GEV Section -->
+    <div class="border rounded-lg p-4 shadow">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2 text-center">
+        GEV (Generalized Extreme Value)
+      </h2>
+      <p class="text-gray-800 mb-4">
+        The GEV distribution models the maxima of datasets and captures extreme
+        values effectively over block maxima. It is useful for understanding
+        peak behavior but may be less flexible for threshold exceedances.
+      </p>
+
+      <hr />
+      <br />
+      <h3 class="text-xl font-semibold text-blue-700 mb-2">Ford Motor Company</h3>
+      <div class="border rounded-lg overflow-hidden">
+        <img src="assets/img/eda/ford_gev.png" alt="Ford GEV Fit"
+          class="w-full h-auto cursor-pointer"
+          (click)="openModal('assets/img/eda/ford_gev.png')" />
+      </div>
+
+      <br /><hr /><br />
+      <h3 class="text-xl font-semibold text-blue-700 mb-2">General Motors</h3>
+      <div class="border rounded-lg overflow-hidden">
+        <img src="assets/img/eda/gm_gev.png" alt="GM GEV Fit"
+          class="w-full h-auto cursor-pointer"
+          (click)="openModal('assets/img/eda/gm_gev.png')" />
+      </div>
+
+      <br /><hr /><br />
+      <h3 class="text-xl font-semibold text-blue-700 mb-2">Stellantis / Chrysler</h3>
+      <div class="border rounded-lg overflow-hidden">
+        <img src="assets/img/eda/stellantis_gev.png" alt="Stellantis GEV Fit"
+          class="w-full h-auto cursor-pointer"
+          (click)="openModal('assets/img/eda/stellantis_gev.png')" />
+      </div>
+    </div>
+
+    <!-- GPD Section -->
+    <div class="border rounded-lg p-4 shadow">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2 text-center">
+        GPD (Generalized Pareto)
+      </h2>
+      <p class="text-gray-800 mb-4">
+        The GPD focuses on modeling threshold exceedances and the tail of the
+        distribution. It provides flexibility in extreme value analysis,
+        particularly when dealing with data above a certain threshold, and
+        performed well for this dataset.
+      </p>
+
+      <h3 class="text-xl font-semibold text-blue-700 mb-2">Ford Motor Company</h3>
+      <div class="border rounded-lg overflow-hidden">
+        <img src="assets/img/eda/ford_gpd.png" alt="Ford GPD Fit"
+          class="w-full h-auto cursor-pointer"
+          (click)="openModal('assets/img/eda/ford_gpd.png')" />
+      </div>
+
+      <br /><hr /><br />
+      <h3 class="text-xl font-semibold text-blue-700 mb-2">General Motors</h3>
+      <div class="border rounded-lg overflow-hidden">
+        <img src="assets/img/eda/gm_gpd.png" alt="GM GPD Fit"
+          class="w-full h-auto cursor-pointer"
+          (click)="openModal('assets/img/eda/gm_gpd.png')" />
+      </div>
+
+      <br /><hr /><br />
+      <h3 class="text-xl font-semibold text-blue-700 mb-2">Stellantis / Chrysler</h3>
+      <div class="border rounded-lg overflow-hidden">
+        <img src="assets/img/eda/stellantis_gpd.png" alt="Stellantis GPD Fit"
+          class="w-full h-auto cursor-pointer"
+          (click)="openModal('assets/img/eda/stellantis_gpd.png')" />
+      </div>
+    </div>
+
+  </div>
+  <br><br>
+   <p class="text-lg text-gray-800 leading-relaxed mb-4">After evaluating both the GEV and GPD models across all three automakers, the GPD emerged as the stronger choice. While the GEV produced inconsistent p-values that occasionally fell below acceptable thresholds, the GPD returned consistently higher p-values across Ford, General Motors, and Stellantis/Chrysler, indicating a more reliable fit to the tail behavior of each return series. </p><p class="text-lg text-gray-800 leading-relaxed mb-4">
+With a well-supported distribution selected, the analysis can now move forward with confidence. The GPD provides the statistical foundation needed to estimate tail risk, calculate return levels, and build a robust extreme value model of Detroit's automotive stock returns.</p>
 </div>

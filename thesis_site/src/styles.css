@@ -3,3 +3,7 @@
 body {
   background-color: #f7e2f9; /* replace with any color you like */
 }
+
+.text-lime-600 {
+  color: var(--color-lime-600);
+}
